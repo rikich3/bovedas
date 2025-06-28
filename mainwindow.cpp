@@ -136,7 +136,20 @@ void MainWindow::setupUI() {
     // Área de texto para mostrar transacciones
     textTransacciones = new QTextEdit;
     textTransacciones->setReadOnly(true);
-    textTransacciones->setMaximumHeight(300);
+    textTransacciones->setMaximumHeight(350);
+    textTransacciones->setStyleSheet(
+        "QTextEdit {"
+        "    font-family: 'Courier New', monospace;"
+        "    font-size: 11px;"
+        "    color: #212529;"
+        "    background-color: #ffffff;"
+        "    border: 2px solid #dee2e6;"
+        "    border-radius: 5px;"
+        "    padding: 10px;"
+        "    selection-background-color: #007bff;"
+        "    selection-color: white;"
+        "}"
+    );
     transaccionesLayout->addWidget(textTransacciones);
     
     splitter->addWidget(controlWidget);
@@ -344,18 +357,52 @@ void MainWindow::actualizarDashboard() {
         detalleTransacciones->setStyleSheet("font-weight: normal; color: #6c757d; font-size: 11px;");
         transaccionesLayout->addWidget(detalleTransacciones);
         
-        // Mostrar últimas transacciones
+        // Mostrar últimas transacciones con detalles completos
         QString textoTransacciones;
-        for (size_t i = 0; i < std::min(size_t(3), transacciones.size()); ++i) {
+        for (size_t i = 0; i < std::min(size_t(5), transacciones.size()); ++i) {
             auto& transaccion = transacciones[transacciones.size() - 1 - i]; // Últimas primero
-            textoTransacciones += QString("ID: %1 | Estado: %2 | %3 %4\n")
-                                .arg(QString::fromStdString(transaccion->getId()))
-                                .arg(QString::fromStdString(transaccion->getEstadoString()))
+            textoTransacciones += QString("╔══ TRANSACCIÓN %1 ══════════════════════════════════════╗\n")
+                                .arg(QString::fromStdString(transaccion->getId()));
+            textoTransacciones += QString("║ Tipo: %1\n")
+                                .arg(QString::fromStdString(transaccion->getTipoString()));
+            textoTransacciones += QString("║ Estado: %1\n")
+                                .arg(QString::fromStdString(transaccion->getEstadoString()));
+            textoTransacciones += QString("║ Origen: %1 - Bóveda %2\n")
+                                .arg(QString::fromStdString(transaccion->getBancoOrigenCodigo()))
+                                .arg(QString::fromStdString(transaccion->getBovedaOrigenId()));
+            textoTransacciones += QString("║ Destino: %1 - Bóveda %2\n")
+                                .arg(QString::fromStdString(transaccion->getBancoDestinoCodigo()))
+                                .arg(QString::fromStdString(transaccion->getBovedaDestinoId()));
+            textoTransacciones += QString("║ Activo: %1 %2\n")
                                 .arg(transaccion->getActivo().getCantidad(), 0, 'f', 2)
                                 .arg(QString::fromStdString(transaccion->getActivo().getTipoString()));
+            textoTransacciones += QString("║ Transportadora: %1\n")
+                                .arg(QString::fromStdString(transaccion->getTransportadora()));
+            textoTransacciones += QString("║ Comisión: %1% ($ %2)\n")
+                                .arg(transaccion->getPorcentajeComision() * 100, 0, 'f', 2)
+                                .arg(transaccion->getComision(), 0, 'f', 2);
+            textoTransacciones += QString("╚═══════════════════════════════════════════════════════════╝\n\n");
         }
         
         textTransacciones->setPlainText(textoTransacciones);
+        
+        // Si no hay transacciones, mostrar mensaje informativo
+        if (transacciones.empty()) {
+            textTransacciones->setPlainText(
+                "╔═══════════════════════════════════════════════════════════╗\n"
+                "║                    SISTEMA DE TRANSACCIONES               ║\n"
+                "╠═══════════════════════════════════════════════════════════╣\n"
+                "║                                                           ║\n"
+                "║  📋 No hay transacciones registradas                     ║\n"
+                "║                                                           ║\n"
+                "║  Para crear una transacción:                             ║\n"
+                "║  1. Complete el formulario de Nueva Transferencia        ║\n"
+                "║  2. Haga clic en 'Iniciar Transferencia'                 ║\n"
+                "║  3. Use el ID generado para procesar la transacción      ║\n"
+                "║                                                           ║\n"
+                "╚═══════════════════════════════════════════════════════════╝"
+            );
+        }
         
         dashboardLayout->addWidget(transaccionesGroup);
         dashboardLayout->addStretch();
