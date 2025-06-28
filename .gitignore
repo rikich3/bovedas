@@ -1,0 +1,60 @@
+# Archivos de compilación
+build/
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.a
+*.lib
+*.moc
+*.qrc
+*.user
+*.user.*
+*.autosave
+*.pro.user
+*.pro.user.*
+*.app
+*.dSYM/
+*.gcno
+*.gcda
+*.gch
+*.pch
+
+# Archivos de Qt Creator
+*.pro.user
+*.qbs.user
+*.creator.user
+*.creator
+*.creator.*
+*.qmlproject.user
+
+# Archivos de configuración y temporales
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Archivos de CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Otros directorios y archivos generados
+*.bak
+*.orig
+*.rej
+
+# Archivos de depuración
+core
+vgcore.*
+
+# Archivos de pruebas
+test_output/
+Testing/
+.vscode/

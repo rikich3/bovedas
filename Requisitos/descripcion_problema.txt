@@ -1,0 +1,15 @@
+Programa para trackear las transacciones de activos entre bancos.
+Una transaccion se da entre 2 bovedas del mismo banco o interbancario.
+La empresa que realiza el transporte blindado recibe un porcentaje apropiado de los activos que moviliza.
+
+El sistema esta conformado por las siguientes pasos:
+1 Preparación y Verificación
+En la bóveda de origen, el dinero se cuenta, sella en bolsas de seguridad y se prepara la guía de remisión.
+2 Transferencia de Custodia (Recojo)
+La transportadora verifica los precintos y firma la guía, asumiendo la responsabilidad del valor.
+3 Transporte y Entrega
+El vehículo blindado transporta el valor al destino final.
+4 Confirmación y Cierre
+En la bóveda de destino, se verifica el valor y se firma la recepción, la custodia regresa al banco.
+5 Conciliación de Sistemas
+Los sistemas del banco y la transportadora se actualizan con la operación completada y los nuevos saldos.

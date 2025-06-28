@@ -1,0 +1,9 @@
+Requisitos funcionales:
+El usuario puede interactuar con el programa a travez de una UI.
+El sistema debe guardar y procesar las operaciones como aparecen en el documento descripcion_problema
+El sistema debe empezar en un estado aleatorio con bancos peruanos aleatorios (entre 10 millones a 100 millones de dolares en activos totales, como soles, dolares o joyas. Empieza el sistema con 3 bancos: BCP, Scotiabank, Bbva)
+El usuario debe ser capaz de realizar las siguientes operaciones:
+- Empezar una transferencia
+- Ver el estado de cada banco y sus bovedas.
+El sistema contempla una serie de excepciones que son manejados por el sistema como excepciones.
+El sistema avisa al usuario de las excepciones que sucedan mientras se ejecutan las operaciones.
